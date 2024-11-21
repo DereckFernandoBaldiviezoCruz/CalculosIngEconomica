@@ -78,26 +78,26 @@ class Tasas {
         // Resolver dinámicamente
         if (i && m) {
             return {
-                r: this.calcularNominalAnual(i, m).toFixed(4),
-                ia: this.calcularEfectivaAnual(i, m).toFixed(4),
+                r: this.calcularNominalAnual(i, m).toFixed(5),
+                ia: this.calcularEfectivaAnual(i, m).toFixed(5),
             };
         } else if (r && m) {
             return {
-                i: this.calcularEfectivaPeriodo(r, m).toFixed(4),
-                ia: this.calcularEfectivaAnual(this.calcularEfectivaPeriodo(r, m), m).toFixed(4),
+                i: this.calcularEfectivaPeriodo(r, m).toFixed(5),
+                ia: this.calcularEfectivaAnual(this.calcularEfectivaPeriodo(r, m), m).toFixed(5),
             };
         } else if (ia && m) {
             return {
-                i: this.calcularEfectivaPorPeriodoDesdeAnual(ia, m).toFixed(4),
-                r: this.calcularNominalAnual(this.calcularEfectivaPorPeriodoDesdeAnual(ia, m), m).toFixed(4),
+                i: this.calcularEfectivaPorPeriodoDesdeAnual(ia, m).toFixed(5),
+                r: this.calcularNominalAnual(this.calcularEfectivaPorPeriodoDesdeAnual(ia, m), m).toFixed(5),
             };
         } else if (i) {
             return {
-                r: this.calcularNominalContinua(i).toFixed(4),
+                r: this.calcularNominalContinua(i).toFixed(5),
             };
         } else if (r) {
             return {
-                i: this.calcularEfectivaContinua(r).toFixed(4),
+                i: this.calcularEfectivaContinua(r).toFixed(5),
             };
         } else {
             throw new Error('Faltan parámetros necesarios para calcular.');
