@@ -3,7 +3,7 @@ const express = require('express');
 const valoresRoutes = require('./valores');
 const tasasRoutes = require('./tasas');
 const factoresRoutes = require('./factores');
-const gradientesRoutes = require('./src/routes/gradientes');
+const gradientesRoutes = require('./gradientes');
 
 const router = express.Router();
 
