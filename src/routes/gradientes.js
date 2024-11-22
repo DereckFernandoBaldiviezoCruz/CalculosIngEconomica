@@ -1,5 +1,5 @@
 const express = require('express');
-const GradienteAritmetico = require('../controllers/gradientes'); // Controlador con los métodos
+const Gradientes = require('../controllers/gradientes'); // Controlador con los métodos
 const router = express.Router();
 
 router.get('/', (req, res) => {
