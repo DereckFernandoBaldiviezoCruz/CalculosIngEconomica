@@ -3,15 +3,14 @@ const GradienteAritmetico = require('../controllers/gradientes'); // Controlador
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    const { tipo, g, i, n, cantidadBase, ultimaCantidad } = req.query;
+    const { tipo, g, i, n, cantidadBase, ultimaCantidad, gradiente } = req.query;
 
     try {
         let resultado;
 
         if (tipo === 'G') {
-            // Cálculo del gradiente basado en la cantidad base y la cantidad final
             if (cantidadBase && ultimaCantidad && n) {
-                resultado = GradienteAritmetico.calcularGradienteDesdeAumento(
+                resultado = Gradientes.calcularGradienteDesdeAumento(
                     parseFloat(cantidadBase),
                     parseFloat(ultimaCantidad),
                     parseInt(n, 10)
@@ -20,9 +19,21 @@ router.get('/', (req, res) => {
             } else {
                 throw new Error('Faltan parámetros para calcular el gradiente.');
             }
+        } else if (tipo === 'CFn') {
+            // Calcular cantidad final basado en cantidadBase y gradiente
+            if (cantidadBase && gradiente && n) {
+                resultado = Gradientes.calcularCantidadFinal(
+                    parseFloat(cantidadBase),
+                    parseFloat(gradiente),
+                    parseInt(n, 10)
+                );
+                res.json({ tipo, cantidadFinal: resultado });
+            } else {
+                throw new Error('Faltan parámetros para calcular la cantidad final.');
+            }
         } else {
             // Otros cálculos financieros (P/G, A/G, etc.)
-            resultado = GradienteAritmetico.resolver({
+            resultado = Gradientes.resolver({
                 tipo,
                 g: g ? parseFloat(g) : undefined,
                 i: i ? parseFloat(i) : undefined,
