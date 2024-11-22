@@ -38,7 +38,7 @@ class Factores {
     static calcularGradiente(tipo, i, n) {
         switch (tipo) {
             case 'P/G':
-                return (1 / i) * (((Math.pow(1 + i, n) - i * n - 1) / (i * Math.pow(1 + i, n))) - n / Math.pow(1 + i, n));
+                return (1 / i) * (((Math.pow(1 + i, n) - i * n - 1) / (i * Math.pow(1 + i, n))));
             case 'A/G':
                 return (1 / i) - (n / (Math.pow(1 + i, n) - 1));
             default:
