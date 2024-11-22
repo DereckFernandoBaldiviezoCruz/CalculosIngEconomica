@@ -16,7 +16,7 @@ class Gradientes {
 
         switch (tipo) {
             case 'P/G': // Presente a Gradiente
-                resultado = g * ((1 / i) - (n / (Math.pow(1 + i, n) - 1)));
+                resultado = g * ((Math.pow(1+i,n) - i*n - 1)/(i*i*Math.pow(1+i,n)));
                 break;
             case 'A/G': // Anualidad a Gradiente
                 resultado = g * ((1 / i) - (n / (Math.pow(1 + i, n) - 1)));
