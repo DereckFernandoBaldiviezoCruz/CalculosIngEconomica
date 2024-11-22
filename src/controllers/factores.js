@@ -1,3 +1,5 @@
+// src/controllers/factores.js
+
 /**
  * Cálculos de factores financieros con detalle del factor y resultado.
  */
@@ -29,28 +31,10 @@ class Factores {
     }
 
     /**
-     * Cálculo del gradiente aritmético basado en tipo.
-     * @param {string} tipo - Tipo de gradiente (P/G, A/G).
-     * @param {number} i - Tasa de interés en decimal.
-     * @param {number} n - Número de períodos.
-     * @returns {number} Factor para gradiente aritmético.
-     */
-    static calcularGradiente(tipo, i, n) {
-        switch (tipo) {
-            case 'P/G':
-                return (1 / i) * (((Math.pow(1 + i, n) - i * n - 1) / (i * Math.pow(1 + i, n))));
-            case 'A/G':
-                return (1 / i) - (n / (Math.pow(1 + i, n) - 1));
-            default:
-                throw new Error(`Tipo de gradiente desconocido: ${tipo}`);
-        }
-    }
-
-    /**
-     * Resuelve un cálculo de factor financiero o gradiente aritmético.
+     * Resuelve un cálculo de factor financiero.
      * @param {Object} params - Parámetros de entrada.
-     * @param {string} params.tipo - Tipo de cálculo (P/F, F/P, A/F, etc., o P/G, A/G).
-     * @param {number} params.valor - Valor inicial (presente, futuro, serie uniforme o gradiente).
+     * @param {string} params.tipo - Tipo de factor (P/F, F/P, A/F, etc.).
+     * @param {number} params.valor - Valor inicial (presente, futuro, serie uniforme).
      * @param {number} params.i - Tasa de interés en decimal.
      * @param {number} params.n - Número de períodos.
      * @returns {Object} Resultado del cálculo.
@@ -62,15 +46,7 @@ class Factores {
             throw new Error('Faltan parámetros: tipo, valor, i, n son obligatorios.');
         }
 
-        let factor;
-        if (['P/F', 'F/P', 'A/F', 'F/A', 'P/A', 'A/P'].includes(tipo)) {
-            factor = this.calcularFactorBase(tipo, i, n);
-        } else if (['P/G', 'A/G'].includes(tipo)) {
-            factor = this.calcularGradiente(tipo, i, n);
-        } else {
-            throw new Error(`Tipo de cálculo desconocido: ${tipo}`);
-        }
-
+        const factor = this.calcularFactorBase(tipo, i, n);
         const resultado = valor * factor;
 
         return {
